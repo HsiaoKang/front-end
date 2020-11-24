@@ -1,8 +1,11 @@
 {
   "name": "project-yarn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
   "dependencies": {
     "react": "^17.0.1"
   }
