@@ -33,11 +33,11 @@ yarn 的安装原理与npm基本类似，根据package.json 和yarn.lock 文件�
 | 全局操作（global）                | yes  | yes  | 在全局环境下的安装、删除、查看等操作, npm 通过-g 标志，yarn则是 yarn global 跟上具体操作 |
 | 帮助信息                          | yes  | yes  |                                                              |
 | 导入（import）                    | -    | yes  | 根据package-lock.json 或node_modules 生成yarn.lock文件       |
-| 包信息（info）                    | no   | yes  | 列出指定包的相关信息                                         |
+| 包信息（info）                    | yes  | yes  | 列出指定包的相关信息，yarn 更加详细                          |
 | 初始化（init）                    | yes  | yes  | 基本相同                                                     |
 | 许可证信息（license）             | no   | yes  | 列出所有安装的软件包的许可证信息                             |
 | 链接（link）                      | yes  | yes  | 基本相同，并且相互兼容                                       |
-| 安装列表（list）                  | yes  | yes  | 列出已经安装的package list                                   |
+| 安装列表（list）                  | yes  | yes  | 列出已经安装的package list，npm ls                           |
 | npm登陆                           | yes  | yes  | 本地登陆npm账号，用于发布包等                                |
 | npm登出                           | yes  | yes  | 登出npm账号                                                  |
 | 过时依赖（outdated）              | yes  | yes  | 列出过时的依赖                                               |
@@ -46,8 +46,8 @@ yarn 的安装原理与npm基本类似，根据package.json 和yarn.lock 文件�
 | 指定版本（policies）              | no   | yes  | 指定项目中始终使用某个yarn版本                               |
 | 发布（publish）                   | yes  | yes  | 将包发布到npm的注册表中                                      |
 | 移除                              | yes  | yes  | npm 使用uninstall，yarn使用 remove                           |
-| 执行                              | yes  | yes  | 较小差异，均执行 script 字段下的命令，支持环境变量和参数     |
-| 标签（tag）                       | yes  | yes  | 基本相同                                                     |
+| 执行（run）                       | yes  | yes  | 较小差异，均执行 script 字段下的命令，支持环境变量和参数，也可执行node_modules 下.bin 中的文件 |
+| 标签（tag）                       | yes  | yes  | 基本相同，npm 下为dist-tag                                   |
 | 团队管理（tem）                   | yes  | yes  | 管理组织下的团队，增加，删除、修改，以及团队的人员管理，     |
 | test                              | yes  | yes  | script 下的test命令                                          |
 | 解链（unlink）                    | yes  | yes  | 基本类似，npm文档上没看到unlink 但实际可用                   |
@@ -58,13 +58,42 @@ yarn 的安装原理与npm基本类似，根据package.json 和yarn.lock 文件�
 | 安装原因（why）                   | no   | yes  | 列出指定包的安装信息，顾名思义，告诉用户为什么安装这个包     |
 | 工作区（workspace）               | yes  | yes  | 基本类似，通过工作区的方式管理各个依赖                       |
 
-以下是我从npm doc 中整理出与yarn对比额外的 cli 的功能：
+以下是与 yarn 对比 npm 额外的 命令：
 
-| 功能                   | 描述                           |
-| ---------------------- | ------------------------------ |
-| 访问级别控制（access） | 设置已经发布的包的访问权限等级 |
-|                        |                                |
-|                        |                                |
+| 功能                   | 描述                                                         |
+| ---------------------- | ------------------------------------------------------------ |
+| 访问级别控制（access） | 设置已经发布的包的访问权限等级                               |
+| 反馈bugs               | 打开指定包的bugs反馈URL，没有则打开主页                      |
+| 清洁安装（ci）         | 常用在自动化的环境，不会改变package.json                     |
+| 命令行，Tab 提示       | 手动添加 tab Completion                                      |
+| 废弃（deprecate）      | 标记 注册表上的 库为废弃的                                   |
+| 打开包文档（docs）     | 别名 home                                                    |
+| npm问题排查（doctor）  | 检查自身运行环境                                             |
+| 编辑包（edit）         | 直接编辑指定包                                               |
+| 执行文件（exec）       | 执行本地或者远程的包，与npx 相似，传参方式不同               |
+| 说明（explain）        | 打印出给定项目的依赖链                                       |
+| explore                | 在已安装的包下执行 一个 sub shell                            |
+| 赞助信息（fund）       | 给出指定包的赞助相关信息                                     |
+| help & help search     | 帮助与相关文档搜索                                           |
+| hook（挂钩）           | 包发生更改时执行相关的操作                                   |
+| 清洁测试（cit）        | Npm ci +npm test                                             |
+| 安装测试（it）         | Nom i + npm test                                             |
+| 组织org                | 组织管理                                                     |
+| ping                   | ping 配置的或者指定的注册表                                  |
+| 本地前缀（prefix）     | 输出本地项目的前缀，可指定 -g（全局安装路径）                |
+| 个人资料（profile）    | 修改npmjs 上注册的个人资料                                   |
+| 修剪（prune）          | 删除package没有添加到依赖的包，有lock文件时回在安装时自动做这步 |
+| 重新编译（rb）         | 用最新的环境重新编译，会使用最新的二进制文件编译所有c++插件  |
+| 仓库（repo）           | 通过浏览器打开指定包的仓库URL                                |
+| 重新开始（restart）    |                                                              |
+| 根（root）             | 输出 当前项目可用的node_modules 文件夹                       |
+| 搜索（search）         | 在注册表上搜索                                               |
+| shrinkwrap             | 将package-lock.json 生成shrinkwrap.json ，此文件优先级高于lock[文件](https://docs.npmjs.com/cli/v6/configuring-npm/package-locks) |
+| 星标（star&stars）     | 对项目添加星标&列出星标的项目                                |
+| 团队（team）           | 团队管理                                                     |
+| 令牌（token）          | 创建/作废令牌                                                |
+| 取消发布（unpublish）  | 取消发布包的指定版本或者整个包                               |
+| 我是谁（whoami）       | 打印用户名                                                   |
 
 yarn 命令及说明：https://classic.yarnpkg.com/en/docs/cli/
 npm cli 命令：https://docs.npmjs.com/cli/v6/commands

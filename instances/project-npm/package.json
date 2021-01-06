@@ -11,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "glob": "^7.1.6",
     "react": "^17.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.16.0"
   }
 }
