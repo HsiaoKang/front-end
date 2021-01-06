@@ -1,0 +1,13 @@
+{
+    "name": "front-end-hodgepodge",
+    "version": "0.0.1",
+    "description": "Just like the name ~_~",
+    "main": "index.js",
+    "repository": "https://github.com/HsiaoKang/front-end.git",
+    "author": "hsiaokang <hsiaokang@163.com>",
+    "license": "MIT",
+    "private": true,
+    "workspaces": [
+        "workspace/*"
+    ]
+}
