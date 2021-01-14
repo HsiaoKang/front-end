@@ -1,3 +1,9 @@
-.hello{
-    color:red
+@font-face {
+    font-family: 'customFont';
+    src: url('./font.ttf');
+}
+.hello {
+    color: red;
+    font-family: 'customFont';
+    background: url('./icon.png');
 }
