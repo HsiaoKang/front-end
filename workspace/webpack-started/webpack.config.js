@@ -7,9 +7,14 @@ const yaml = require('yamljs')
 const json5 = require('json5')
 
 module.exports = {
+    mode: 'development',
     entry: {
         index: './src/index.js',
         print: './src/print.js',
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './dist',
     },
     module: {
         rules: [
@@ -68,14 +73,22 @@ module.exports = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({
+            cleanStaleWebpackAssets: false,
+        }),
         new HtmlWebpackPlugin({
-            title: 'Output Management',
+            title: 'Development',
         }),
     ],
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: 'static/[hash][ext][query]',
+        // webpack-dev-middleware 需要正确的路径
+        // 该选项指定在浏览器中引用时输出目录的公共URL。
+        // 相对URL相对于HTML页面（或标记）进行解析。
+        // 相对于服务器的URL，
+        // 相对于协议的URL或绝对URL也是可能的，有时甚至是必需的。 e。在CDN上托管资产时。
+        publicPath: '/',
     },
 }

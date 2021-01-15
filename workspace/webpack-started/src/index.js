@@ -19,7 +19,7 @@ function component() {
     console.log(json5);
         
     // _:lodash
-    element.innerHTML = _.join(['Hello', 'webpack', someText], ' ')
+    element.innerHTML = _.join(['Hello', 'webpack', someText,'123'], ' ')
 
     element.classList.add('hello')
 

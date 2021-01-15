@@ -34,7 +34,17 @@ V5 中如果loader 和 Asset Module 共同存在，可以将type设置为 `javas
 
 
 
-推荐使用的 一些包
+## 开发环境
+
+三种方式帮助开发者自动编译文件
+
+1. Watch mode ，webpack 的 `--watch` 模式，缺点是不能使浏览器自动刷新。
+2. webpack-dev-server  [配置链接](https://webpack.js.org/configuration/dev-server/) [HMR](https://webpack.js.org/guides/hot-module-replacement/)
+3. Web pack-dev-middleware 通过自己启动一个server 来监听文件更改，需要手动实现自动刷新
+
+
+
+## 推荐使用的 一些包
 
 
 
@@ -46,10 +56,11 @@ html 自动生成 html-webpack-plugin
 
 
 
-相关阅读
+## 相关阅读
 
 https://webpack.js.org/guides/code-splitting/
 
 https://webpack.js.org/concepts/manifest/
 
 https://webpack.js.org/guides/caching/
+
