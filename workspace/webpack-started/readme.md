@@ -44,6 +44,29 @@ V5 中如果loader 和 Asset Module 共同存在，可以将type设置为 `javas
 
 
 
+## 代码拆分
+
+三种方式
+
+1. entry points，通过配置 entry 手动拆分，缺点是会重复打包相同的引用，不灵活
+2. 防止重复， [entry depencies](https://webpack.js.org/configuration/entry-context/#dependencies) 或者 [split-chunks-plugin](https://webpack.js.org/plugins/split-chunks-plugin/)
+3. 动态导入，使用ES 的 import() 方法 或 webpack 的 require.ensure 方法
+
+动态导入通过添加 特殊注释，可以支持预请求与预加载
+
+prefetch: resource is probably needed for some navigation in the future
+preload: resource will also be needed during the current navigation
+
+
+
+用于分析打包结构的工具
+
+webpack-chart: Interactive pie chart for webpack stats.
+webpack-visualizer: Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
+webpack-bundle-analyzer: A plugin and CLI utility that represents bundle content as a convenient interactive zoomable treemap.
+webpack bundle optimize helper: This tool will analyze your bundle and give you actionable suggestions on what to improve to reduce your bundle size.
+bundle-stats: Generate a bundle report(bundle size, assets, modules) and compare the results between different builds.
+
 ## 推荐使用的 一些包
 
 
@@ -53,6 +76,8 @@ svg 压缩 mini-svg-data-uri https://www.npmjs.com/package/mini-svg-data-uri
 html 自动生成 html-webpack-plugin
 
 清理编译文件夹 clean-webpack-plugin 
+
+Css https://webpack.js.org/plugins/mini-css-extract-plugin/
 
 
 

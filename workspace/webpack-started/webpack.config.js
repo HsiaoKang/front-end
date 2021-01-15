@@ -9,8 +9,19 @@ const json5 = require('json5')
 module.exports = {
     mode: 'development',
     entry: {
-        index: './src/index.js',
-        print: './src/print.js',
+        
+        // 动态导入
+        index:'./src/index.js'
+        // 使用 dependOn 方式
+        // basic: {
+        //     import: './src/basic.js',
+        //     dependOn: 'shared',
+        // },
+        // print: {
+        //     import: './src/print.js',
+        //     dependOn: 'shared',
+        // },
+        // shared: 'lodash',
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -81,7 +92,7 @@ module.exports = {
         }),
     ],
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].[chunkhash:8].js',
         path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: 'static/[hash][ext][query]',
         // webpack-dev-middleware 需要正确的路径
@@ -91,4 +102,17 @@ module.exports = {
         // 相对于协议的URL或绝对URL也是可能的，有时甚至是必需的。 e。在CDN上托管资产时。
         publicPath: '/',
     },
+
+    // 官方建议在做代码拆分(entery depencies)时加上下面内容，但不加暂时没有发现问题。
+    // optimization: {
+    //     runtimeChunk: 'single',
+    // },
+
+    // 使用 SplitChunksPlugin
+    // https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'all',
+    //     },
+    // },
 }
