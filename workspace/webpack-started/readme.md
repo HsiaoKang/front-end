@@ -36,5 +36,20 @@ V5 中如果loader 和 Asset Module 共同存在，可以将type设置为 `javas
 
 推荐使用的 一些包
 
-mini-svg-data-uri https://www.npmjs.com/package/mini-svg-data-uri
 
+
+svg 压缩 mini-svg-data-uri https://www.npmjs.com/package/mini-svg-data-uri
+
+html 自动生成 html-webpack-plugin
+
+清理编译文件夹 clean-webpack-plugin 
+
+
+
+相关阅读
+
+https://webpack.js.org/guides/code-splitting/
+
+https://webpack.js.org/concepts/manifest/
+
+https://webpack.js.org/guides/caching/

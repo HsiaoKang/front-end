@@ -1,15 +1,15 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const toml = require('toml')
 const yaml = require('yamljs')
 const json5 = require('json5')
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-        assetModuleFilename: 'static/[hash][ext][query]',
+    entry: {
+        index: './src/index.js',
+        print: './src/print.js',
     },
     module: {
         rules: [
@@ -66,5 +66,16 @@ module.exports = {
                 type: 'asset/source',
             },
         ],
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Output Management',
+        }),
+    ],
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'static/[hash][ext][query]',
     },
 }

@@ -1,11 +1,14 @@
 import _ from 'lodash'
 import './style.css'
+
 import someText from './someText.txt'
 import msg from './msg.xml'
 import someData from './someData.csv'
 import yaml from './data.yaml'
 import toml from './data.toml'
 import json5 from './data.json5'
+
+import printMe from './print'
 
 function component() {
     const element = document.createElement('div')
@@ -20,6 +23,7 @@ function component() {
 
     element.classList.add('hello')
 
+    element.onclick = printMe
     return element
 }
 
