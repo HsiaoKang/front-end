@@ -79,6 +79,16 @@ v5 中 已经做好了在打包时没有修改的就直接取缓存，之前的�
 
 通过基本的配置可以将代码作为几种类型的库输出，支持全局变量、this、Window、UMD（require）的引入方式。
 
+## 环境变量
+
+关于为什么使用 NODE_ENV https://dzone.com/articles/what-you-should-know-about-node-env
+
+webpack --env 来设置环境变量
+
+通过导出一个函数从参数中接受环境变量
+
+
+
 ## 推荐使用的 一些包
 
 
