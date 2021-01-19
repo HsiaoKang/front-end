@@ -9,9 +9,8 @@ const json5 = require('json5')
 module.exports = {
     mode: 'development',
     entry: {
-        
         // 动态导入
-        index:'./src/index.js'
+        index: './src/index.js',
         // 使用 dependOn 方式
         // basic: {
         //     import: './src/basic.js',
@@ -88,13 +87,15 @@ module.exports = {
             cleanStaleWebpackAssets: false,
         }),
         new HtmlWebpackPlugin({
-            title: 'Development',
+            title: 'Caching',
         }),
     ],
     output: {
-        filename: '[name].[chunkhash:8].js',
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
         assetModuleFilename: 'static/[hash][ext][query]',
+        // 输出文件名hash长度统一配置为 8
+        hashDigestLength: 8,
         // webpack-dev-middleware 需要正确的路径
         // 该选项指定在浏览器中引用时输出目录的公共URL。
         // 相对URL相对于HTML页面（或标记）进行解析。
@@ -104,9 +105,19 @@ module.exports = {
     },
 
     // 官方建议在做代码拆分(entery depencies)时加上下面内容，但不加暂时没有发现问题。
-    // optimization: {
-    //     runtimeChunk: 'single',
-    // },
+    optimization: {
+        runtimeChunk: 'single',
+        // 将node_modules 中的包集中打一个包缓存
+        // splitChunks: {
+        //     cacheGroups: {
+        //         vendor: {
+        //             test: /[\\/]node_modules[\\/]/,
+        //             name: 'vendors',
+        //             chunks: 'all',
+        //         },
+        //     },
+        // },
+    },
 
     // 使用 SplitChunksPlugin
     // https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks

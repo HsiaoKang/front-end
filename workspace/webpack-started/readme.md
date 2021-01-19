@@ -67,6 +67,14 @@ webpack-bundle-analyzer: A plugin and CLI utility that represents bundle content
 webpack bundle optimize helper: This tool will analyze your bundle and give you actionable suggestions on what to improve to reduce your bundle size.
 bundle-stats: Generate a bundle report(bundle size, assets, modules) and compare the results between different builds.
 
+
+
+## 缓存
+
+v5 中 已经做好了在打包时没有修改的就直接取缓存，之前的版本需要手动设置moduleIds
+
+
+
 ## 推荐使用的 一些包
 
 
