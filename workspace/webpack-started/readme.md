@@ -1,6 +1,6 @@
 # webpack 基本示例
 
-
+此项目包含webpack的各类配置实践，主要以学习为目的，并在将来为配置项目提供参考。
 
 版本: 5.11.1
 
@@ -128,6 +128,53 @@ webpack --env 来设置环境变量
 25. 特定工具可能存在特定的问题，详见：https://webpack.js.org/guides/build-performance/ 最下方
 
 
+
+## 内容安全策略（CSP）
+
+https://stackoverflow.com/questions/49639625/how-do-i-integrate-the-value-of-webpack-nonce-with-my-content-security-poli
+
+
+
+## Vagrant 支持
+
+https://www.vagrantup.com/
+
+https://webpack.js.org/guides/development-vagrant/
+
+
+
+## 依赖管理
+
+以模块的角度看来，引入的其他模块就是本模块的依赖。
+
+对于这些依赖，提供了两个方法来处理
+
+1. 使用表达式的require(),eg: require('./floder'+ name+'.ejs')
+2. 自定义导入上下文，`require.context()`方法，[详见](https://webpack.js.org/guides/dependency-management/)
+
+
+
+## 搭建脚手架
+
+https://webpack.js.org/guides/scaffolding/
+
+教程：https://webpack.js.org/contribute/writing-a-scaffold/
+
+
+
+## 模块热重载(HMR)
+
+概念：https://webpack.js.org/concepts/hot-module-replacement
+
+在运行时检查并通知应用更新，应用可以自动或者手动进行更新，通知的内容包含一个更新的列表和更新的块
+
+使用DevServer 实现HMR 时默认需要手动去关联指定的模块（文件），并编写更新逻辑，样式的HMR 则很简单，使用style-loader 就可以，这里有一些推荐的HMR实现：
+
+1. React:https://github.com/gaearon/react-hot-loader
+2. Vue:https://github.com/vuejs/vue-loader
+3. Elm:https://github.com/klazuka/elm-hot-webpack-loader
+4. Angular:https://github.com/PatrickJS/angular-hmr
+5. Svelte:https://github.com/sveltejs/svelte-loader
 
 ## 推荐使用的 一些包
 

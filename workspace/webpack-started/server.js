@@ -1,4 +1,5 @@
 // 文件监控 server
+// 手动建立并监听一个服务，使用 webpack-dev-middleware
 
 const express = require('express')
 const webpack = require('webpack')
