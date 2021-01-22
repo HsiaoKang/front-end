@@ -9,7 +9,7 @@ import toml from './data.toml'
 import json5 from './data.json5'
 
 import printMe from './print'
-
+import {cube} from './math'
 function component() {
     const element = document.createElement('div')
     console.log(msg);
@@ -19,7 +19,7 @@ function component() {
     console.log(json5);
         
     // _:lodash
-    element.innerHTML = _.join(['Hello', 'webpack', someText,'123'], ' ')
+    element.innerHTML = _.join(['Hello', 'webpack', someText,cube(5)], ' ')
 
     element.classList.add('hello')
 

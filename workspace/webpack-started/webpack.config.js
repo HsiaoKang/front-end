@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
@@ -8,24 +9,25 @@ const json5 = require('json5')
 
 const config = {
     mode: 'development',
+    // mode: 'production',
     entry: {
         // 动态导入
-        index: './src/index.js',
+        // index: './src/index.js',
         // 在此入口配置了将会单独打包为一个 chunk
-        print: './src/print.js',
+        // print: './src/print.js',
         // 使用 dependOn 方式
-        // basic: {
-        //     import: './src/basic.js',
-        //     dependOn: 'shared',
-        // },
-        // print: {
-        //     import: './src/print.js',
-        //     dependOn: 'shared',
-        // },
-        // shared: 'lodash',
+        basic: {
+            import: './src/basic.js',
+            dependOn: 'shared',
+        },
+        print: {
+            import: './src/print.js',
+            dependOn: 'shared',
+        },
+        shared: 'lodash',
     },
 
-    devtool: 'inline-source-map',
+    devtool: false,
     // 使用Node.js 自行配合 devServer 时 此处的配置需要移到实例化devServer 的地方
     // devServer: {
     //     contentBase: './dist',
@@ -113,7 +115,7 @@ const config = {
 
     // 官方建议在做代码拆分(entery depencies)时加上下面内容，但不加暂时没有发现问题。
     optimization: {
-        runtimeChunk: 'single',
+        runtimeChunk: 'multiple',
         // 将node_modules 中的包集中打一个包缓存
         // splitChunks: {
         //     cacheGroups: {
@@ -135,11 +137,12 @@ const config = {
     // },
 }
 
+// server2
 // 使用Node.js 自行配合devServer时 config 必须为一个对象，不能是函数
 module.exports = config
 
 // module.exports = (env) => {
 //     console.log('env', env)
 //     console.log(process.env.NODE_ENV)
-//     return config
+//     return  config
 // }
