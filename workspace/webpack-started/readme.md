@@ -162,7 +162,7 @@ https://webpack.js.org/guides/scaffolding/
 
 
 
-## 模块热重载(HMR)
+## 模块热替换(HMR)
 
 概念：https://webpack.js.org/concepts/hot-module-replacement
 
@@ -193,6 +193,18 @@ https://segmentfault.com/a/1190000015689240
 https://webpack.js.org/guides/tree-shaking/
 
 手动标记及v5修改的部分：https://webpack.js.org/blog/2020-10-10-webpack-5-release/
+
+
+
+## 生产
+
+配置文件可通过 `webpack-merge` 工具拆分成不同场景的配置，生产模式下webpack将自动设置process.env.NODE_ENV 为 production，从v4开始会默认将最小化代码（包括删除无效代码）。
+
+
+
+部分配置可以通过CLI 指定，如mode，minimize等
+
+
 
 ## 推荐使用的 一些包
 
