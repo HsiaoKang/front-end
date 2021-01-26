@@ -180,7 +180,9 @@ https://webpack.js.org/guides/scaffolding/
 
 ## 树抖动
 
-通过添加`sideEffects`,支持将未使用的代码从包中剔除出去，比如在导入一个module的其中一个导出时，根据ES规范，需要导入整个模块，因为其中可能包含一些副作用（类似为window增加属性这样），如果作者能保证没有副作用，那么webpack支持通过添加`sideEffects`标记来shaking 掉这些无用的代码。
+v5版本将自动分析并标记模块是否为“无副作用”
+
+通过添加`sideEffects`,支持将未使用的代码从包中剔除出去，比如在导入一个module的其中一个导出时，根据ES规范，需要导入整个模块，因为其中可能包含一些副作用（类似为window增加属性这样），如果作者能保证没有副作用，那么webpack支持通过添加`sideEffects`标记来shake 掉这些无用的代码。
 
 简介：https://github.com/webpack/webpack/blob/0b13cf19a19fd64d176c77aecbbf00ec57966276/examples/side-effects/README.md
 
@@ -189,6 +191,8 @@ https://webpack.js.org/guides/scaffolding/
 https://segmentfault.com/a/1190000015689240
 
 https://webpack.js.org/guides/tree-shaking/
+
+手动标记及v5修改的部分：https://webpack.js.org/blog/2020-10-10-webpack-5-release/
 
 ## 推荐使用的 一些包
 

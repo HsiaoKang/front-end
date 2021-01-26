@@ -1,6 +1,6 @@
 import printMe from './print'
 
-import {cube} from './math'
+import {cube,square} from './math'
 
 // 使用 import() 方法导入的将被拆成独立的chunk，
 import('./getComponent').then(({ default: getComponent }) =>
@@ -14,8 +14,8 @@ import('./getComponent').then(({ default: getComponent }) =>
 function component() {
     const element = document.createElement('div')
     const btn = document.createElement('button')
-
-    element.innerHTML = _.join(['Hello', 'webpack'+cube(5)], ' ')
+    square(1)
+    element.innerHTML = _.join(['Hello', 'webpack'+cube(Math.random())], ' ')
 
     btn.innerHTML = 'Click me and check the console!'
     btn.onclick = printMe // onclick event is bind to the original printMe function
