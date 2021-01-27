@@ -1,24 +1,26 @@
-import printMe from './print'
+// import printMe from './print'
+import _ from 'lodash'
 
-import {cube,square} from './math'
-
-// 使用 import() 方法导入的将被拆成独立的chunk，
-import('./getComponent').then(({ default: getComponent }) =>
-    getComponent().then((component) => {
-        document.body.appendChild(component)
-        console.log('appendComponent')
-    })
-)
+import { cube, square } from './math'
 
 // HMR 例子
 function component() {
     const element = document.createElement('div')
     const btn = document.createElement('button')
     square(1)
-    element.innerHTML = _.join(['Hello', 'webpack'+cube(Math.random())], ' ')
+    element.innerHTML = _.join(['Hello', 'webpack' + cube(Math.random())], ' ')
 
     btn.innerHTML = 'Click me and check the console!'
-    btn.onclick = printMe // onclick event is bind to the original printMe function
+    btn.onclick = () => {
+        // 用户行为触发模块加载
+        // 使用 import() 方法导入的将被拆成独立的chunk，
+        import(/* webpackChunkName: "geCom" */'./getComponent').then(({ default: getComponent }) =>
+            getComponent().then((component) => {
+                document.body.appendChild(component)
+                console.log('appendComponent')
+            })
+        )
+    } // onclick event is bind to the original printMe function
 
     element.appendChild(btn)
 

@@ -10,12 +10,13 @@ const json5 = require('json5')
 const config = {
     entry: {
         // 动态导入
-        // index: './src/index.js',
-        index: {
-            import:'./src/index.js',
-            dependOn:'shared'
-        },
-        math:'./src/math.js',
+        index: './src/index.js',
+        // index: {
+        //     import:'./src/index.js',
+        //     dependOn:'shared'
+        // },
+
+        // math:'./src/math.js',
 
         // 在此入口配置了将会单独打包为一个 chunk
         // print: './src/print.js',
@@ -28,7 +29,7 @@ const config = {
         //     import: './src/print.js',
         //     dependOn: 'shared',
         // },
-        shared: 'lodash',
+        // shared: 'lodash',
     },
     module: {
         rules: [

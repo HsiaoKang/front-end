@@ -206,6 +206,20 @@ https://webpack.js.org/guides/tree-shaking/
 
 
 
+## 懒加载
+
+or 按需加载，在逻辑断点上分割代码。
+
+webpack中 使用 import() 方法会拆分掉代码，在调用时加载。
+
+各个框架的推荐：
+
+react: https://reactrouter.com/web/guides/code-splitting
+
+vue: https://vuedose.tips/dynamic-imports-in-vue-js-for-better-performance/
+
+angular: https://angular.io/guide/router#milestone-6-asynchronous-routing &https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd
+
 ## 推荐使用的 一些包
 
 

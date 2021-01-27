@@ -3,8 +3,8 @@
 const webpackDevServer = require('webpack-dev-server')
 const webpack  = require('webpack')
 
-const config = require('./webpack.config')
-debugger
+const config = require('./webpack.dev')
+
 // webpack.config 的 devServer 配置移动到这里
 const options  = {
     contentBase:'./dist',
