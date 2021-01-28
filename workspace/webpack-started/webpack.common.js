@@ -10,7 +10,7 @@ const json5 = require('json5')
 const config = {
     entry: {
         // 动态导入
-        index: './src/index.js',
+        index: './src/index.ts',
         // index: {
         //     import:'./src/index.js',
         //     dependOn:'shared'
@@ -33,6 +33,11 @@ const config = {
     },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             // {
             //     test: require.resolve('./src/getComponent.js'),
             //     use: [
@@ -47,14 +52,13 @@ const config = {
 
             {
                 test: require.resolve('./src/getComponent.js'),
-                use:'exports-loader?exports=default|getComponent'
+                use: 'exports-loader?exports=default|getComponent',
             },
             {
                 test: require.resolve('./src/globals.js'),
                 // 指定文件导出type 和导出的内容
-                use:
-                  'exports-loader?type=commonjs&exports=helpers,file',
-              },
+                use: 'exports-loader?type=commonjs&exports=helpers,file',
+            },
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
@@ -108,6 +112,9 @@ const config = {
                 type: 'asset/source',
             },
         ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', 'js'],
     },
     plugins: [
         new CleanWebpackPlugin({

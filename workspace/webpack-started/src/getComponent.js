@@ -1,5 +1,5 @@
 // import './style.css'
-function getComponent() {
+ function getComponent() {
     // import() 可以使用动态表达式来导入
     // return import(/* webpackChunkName: "lodash2"*/ `${'lo'}dash`)
     //     .then(({ default: _ }) => {

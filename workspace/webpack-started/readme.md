@@ -231,6 +231,20 @@ angular: https://angular.io/guide/router#milestone-6-asynchronous-routing &https
 
 
 
+## TypeScript
+
+需要安装typescript 和 ts-loader，并配置tsconfig,json。若想通过babel来处理，则可以使用babel的预设 `@babel/preset-typescript`,从而减少一个laoder的使用
+
+
+
+https://babeljs.io/docs/en/babel-preset-typescript
+
+https://babeljs.io/docs/en/babel-plugin-transform-typescript
+
+
+
+
+
 ## 推荐使用的 一些包
 
 

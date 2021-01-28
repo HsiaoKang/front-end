@@ -1,6 +1,6 @@
 // import printMe from './print'
 import _ from 'lodash'
-import { cube, square } from './math'
+import { cube, square } from './math.js'
 const glob = require('./globals.js')
 console.log(glob)
 
@@ -15,7 +15,7 @@ function component() {
     btn.onclick = () => {
         // 用户行为触发模块加载
         // 使用 import() 方法导入的将被拆成独立的chunk，
-        import(/* webpackChunkName: "getCom" */ './getComponent').then(({ default: getComponent }) =>
+        import(/* webpackChunkName: "getCom" */ './getComponent.js').then(({ default: getComponent }) =>
             getComponent().then((component) => {
                 document.body.appendChild(component)
                 console.log('appendComponent')
