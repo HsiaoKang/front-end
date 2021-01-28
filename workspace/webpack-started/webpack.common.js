@@ -10,7 +10,7 @@ const json5 = require('json5')
 const config = {
     entry: {
         // 动态导入
-        index: './src/index.ts',
+        index: './src/index.js',
         // index: {
         //     import:'./src/index.js',
         //     dependOn:'shared'

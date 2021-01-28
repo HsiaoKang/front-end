@@ -31,6 +31,16 @@ function component() {
 let element = component() // Store the element to re-render on print.js changes
 document.body.appendChild(element)
 
+const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
+worker.postMessage({
+  question:
+    'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
+});
+worker.onmessage = ({ data: { answer } }) => {
+  console.log(answer);
+};
+
+
 // 把需要HMR的文件 关联起来，并手动更新，否则依旧是全局的更新
 if (module.hot) {
     module.hot.accept('./getComponent.js', function () {
