@@ -1,6 +1,6 @@
 // import printMe from './print'
 import _ from 'lodash'
-import { cube, square } from './math.js'
+import { cube, square } from 'math'
 const glob = require('./globals.js')
 console.log(glob)
 
@@ -31,14 +31,26 @@ function component() {
 let element = component() // Store the element to re-render on print.js changes
 document.body.appendChild(element)
 
-const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
-worker.postMessage({
-  question:
-    'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
-});
-worker.onmessage = ({ data: { answer } }) => {
-  console.log(answer);
-};
+// const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
+// worker.postMessage({
+//   question:
+//     'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
+// });
+// worker.onmessage = ({ data: { answer } }) => {
+//   console.log(answer);
+// };
+
+
+// PWA 注册 service worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js').then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }
 
 
 // 把需要HMR的文件 关联起来，并手动更新，否则依旧是全局的更新

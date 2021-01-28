@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
@@ -121,7 +122,11 @@ const config = {
             cleanStaleWebpackAssets: false,
         }),
         new HtmlWebpackPlugin({
-            title: 'Production',
+            title: 'Progressive Web Application',
+        }),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
         }),
         new webpack.ProvidePlugin({
             // tree shaking 多余的代码

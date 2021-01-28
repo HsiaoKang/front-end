@@ -243,7 +243,23 @@ https://babeljs.io/docs/en/babel-plugin-transform-typescript
 
 
 
+## PWA
 
+通过 workbox-webpack-plugin 实现，可以成功注册service work，但后端停止后并不能访问应用，
+
+
+
+## 对外导出
+
+在package.json 中指定 exports ，可以在包的外部引入这些指定的导出内容。
+
+详见：https://webpack.js.org/guides/package-exports/
+
+
+
+## 与其他工具进行整合
+
+https://webpack.js.org/guides/integrations/
 
 ## 推荐使用的 一些包
 
