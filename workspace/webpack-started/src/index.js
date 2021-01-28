@@ -1,7 +1,8 @@
 // import printMe from './print'
 import _ from 'lodash'
-
 import { cube, square } from './math'
+const glob = require('./globals.js')
+console.log(glob)
 
 // HMR 例子
 function component() {
@@ -14,7 +15,7 @@ function component() {
     btn.onclick = () => {
         // 用户行为触发模块加载
         // 使用 import() 方法导入的将被拆成独立的chunk，
-        import(/* webpackChunkName: "geCom" */'./getComponent').then(({ default: getComponent }) =>
+        import(/* webpackChunkName: "getCom" */ './getComponent').then(({ default: getComponent }) =>
             getComponent().then((component) => {
                 document.body.appendChild(component)
                 console.log('appendComponent')

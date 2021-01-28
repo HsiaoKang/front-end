@@ -220,6 +220,17 @@ vue: https://vuedose.tips/dynamic-imports-in-vue-js-for-better-performance/
 
 angular: https://angular.io/guide/router#milestone-6-asynchronous-routing &https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd
 
+
+
+## Shimming(垫片？)
+
+1. 可以通过`ProvidePlugin` 定义全局变量，不引入也可以使用
+2. exports-loader 
+3. Imports-loader
+4. Babel-polyfills，通过babel-preset-env 进一步更细粒度的控制polyfills
+
+
+
 ## 推荐使用的 一些包
 
 

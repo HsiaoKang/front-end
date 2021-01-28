@@ -33,6 +33,28 @@ const config = {
     },
     module: {
         rules: [
+            // {
+            //     test: require.resolve('./src/getComponent.js'),
+            //     use: [
+            //         {
+            //             loader:'imports-loader',
+            //             options:{
+            //                 wrapper:'window'
+            //             }
+            //         },
+            //     ],
+            // },
+
+            {
+                test: require.resolve('./src/getComponent.js'),
+                use:'exports-loader?exports=default|getComponent'
+            },
+            {
+                test: require.resolve('./src/globals.js'),
+                // 指定文件导出type 和导出的内容
+                use:
+                  'exports-loader?type=commonjs&exports=helpers,file',
+              },
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
@@ -93,6 +115,10 @@ const config = {
         }),
         new HtmlWebpackPlugin({
             title: 'Production',
+        }),
+        new webpack.ProvidePlugin({
+            // tree shaking 多余的代码
+            join: ['lodash', 'join'],
         }),
     ],
     output: {

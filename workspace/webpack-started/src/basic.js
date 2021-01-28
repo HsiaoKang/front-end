@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import './style.css'
 
 import someText from './someText.txt'
@@ -19,7 +18,7 @@ function component() {
     console.log(json5);
         
     // _:lodash
-    element.innerHTML = _.join(['Hello', 'webpack', someText,cube(5)], ' ')
+    element.innerHTML = join(['Hello', 'webpack', someText,cube(5)], ' ')
 
     element.classList.add('hello')
 
