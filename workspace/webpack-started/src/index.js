@@ -1,6 +1,6 @@
 // import printMe from './print'
 import _ from 'lodash'
-import { cube, square } from 'math'
+import { cube, square } from './math.js'
 const glob = require('./globals.js')
 console.log(glob)
 

@@ -1,1 +1,0 @@
-(self.webpackChunkwebpack_started=self.webpackChunkwebpack_started||[]).push([[829],{392:(e,t,s)=>{"use strict";s.r(t),s.d(t,{default:()=>a});const a=function(){const e=document.createElement("div");return e.innerHTML=_.join(["Hello","this is dynamic","import"]," "),this.alert("haha"),e.classList.add("hello"),e}}}]);
