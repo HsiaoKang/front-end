@@ -1,2 +1,2 @@
 node_modules
-./workspace/*/dist
+/workspace/**/dist
