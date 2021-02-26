@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+## 什么是虚拟DOM？
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+自己：对真实DOM的抽象，虚拟DOM可以反映出DOM的结构和内容。比如说像在需要更新DOM的时候先通过diff 比对虚拟DOM 然后再将更新后的虚拟DOM，反映（渲染）到真实的页面上。 
 
-## Available Scripts
+老师：用Javascript 对象表示DOM信息和结构，当状态变更的时候，重新渲染这个Javascript 的对象结构。这个Javascript 对象成为 virtual dom。
 
-In the project directory, you can run:
+要点总结，js对象、结构、信息（内容）、渲染，提及：diff
 
-### `yarn start`
+## 为什么使用虚拟DOM
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+自己：浏览器的渲染成本很高（重绘、回流），在不使用VDOM的情况下，每次大的、小的，频繁的修改都会使浏览器再次渲染，容易引发性能问题，导致用户体验下降，使用了VDOM后呢，就可以更好的控制这个过程，比如将短时间内的多次操作合并为一次，或者通过对比修改前后，过滤掉某些不必要的更新和缩小更新的范围
+https://www.jianshu.com/p/a6553a98bda3
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+老师：DOM操作很慢，轻微的操作都可能导致页面重新排版，非常耗性能。相对于DOM对象，js对象处理起来更快（原生DOM属性过多，增加diff成本）而且更简单。通过diff算法对比新旧vdom之间的差异，可以批量、最小化执行dom操作，从而提高性能。
 
-### `yarn test`
+要点总结：渲染成本高（重绘、回流）、diff算法比对后合并修改、最小化修改DOM、对VDOM的diff比直接对原生DOM diff 过滤了多余属性，规避了浏览器差异。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 虚拟DOM用在哪儿
 
-### `yarn build`
+自己：这是React 的内部实现，在使用React 的时候就会用到，在组件创建，渲染，状态改变的时候都会涉及。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+老师：React 中用JSX 语法描述视图，17之前通过babel-loader 转译为React.createElement 形式。该函数将生成vdom来描述真实dom。将来如果状态变化，vdom将作出相应变化，再通过diff算法对比老vdom区别从而作出最终dom操作。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 什么是jsx
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+React 定义的一种语法，将js的表达式结合到html结构中，最终需要编译为js在运行时使用，是一种语法糖
 
-### `yarn eject`
+### 为什么用jsx
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+提高编写、阅读效率。
+有提到内部优化，提高性能，但不知依据是什么
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### reconciliation 协调
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+在两次render 之间比对 虚拟DOM 树的差别，最大效率的更新UI 。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+diff 规则
 
-## Learn More
+算法复杂度 O(n)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+key +类型  +同层级
+组件只是类型改变的情况下，直接生成新的节点，包括子节点
+组件只是位置不同，避免每个节点都做遍历，直接生成新的节点
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 策略
 
-### Code Splitting
+1. 同级比较（Web UI 中 DOM 节点跨层级移动操作很少，忽略）
+2. 不同类型的组件生成不同的树形结构（理解为对比时，不同类型的组件直接重新生成，子级结构不再比对）
+3. 通过key 来确定组件在不同的渲染下是否稳定。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Fiber
 
-### Analyzing the Bundle Size
+1. 通过diff 算法来保证了更新的最高效率，但diff 的过程本身也需要消耗性能，如果遍历的内容过多，主线程一直被占用，主线程上的布局、动画等周期性任务无法立即得到处理，造成视觉上的卡顿。（js线程 https://www.jianshu.com/p/8821c6432fe1）
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. 用户一次操作可能会触发多个任务，如搜索时，需要更新搜索框的内容，同时也会触发模糊搜索，所以需要确定任务优先级
 
-### Making a Progressive Web App
+3. 增量渲染（把渲染任务拆分成块，匀到多帧（理解为分配到多次渲染中））
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+4. 控制任务终止、暂停，复用渲染任务（单链表）
 
-### Advanced Configuration
+5. 应对并发
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+requestIdleCallback(callback[,options]) ： 浏览器空闲时调用函数	
 
-### Deployment
+## hooks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+useReducer 的优势，可以内置数据修改逻辑
+useEffect 和useLayoutEffect，useLayoutEffect 可以更快的触发，不必等整个组件更新完毕
+useEffect 类比 class的生命周期：
+didMount,didUpdate,wellUnMount
 
-### `yarn build` fails to minify
+### 解决的问题
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. 组件之间逻辑的复用
+2. 脱离生命周期，内部逻辑也可以拆分，更容易阅读
+3. 解决了class组件的this指向这种问题
+
+写在函数组件的第一层
+
+因为要保证顺序。hooks以链表的形式挂在组件上，依次按顺序执行
